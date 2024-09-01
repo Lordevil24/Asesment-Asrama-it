@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "rajaluqmanbangkit",
+    "database": "db_perpus",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
