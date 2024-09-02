@@ -3,7 +3,7 @@ Membuat API: Saya memanfaatkan Express.js untuk membuat API yang akan mengelola 
 Database PostgreSQL: Saya menggunakan PostgreSQL sebagai database utama. Dengan bantuan client pg, Saya telah menghubungkan Express.js dengan PostgreSQL untuk menyimpan dan mengambil data buku dari database.
 Autoloading: Saya telah mengatur Express.js untuk mendukung autoloading, yang berarti perubahan kode akan otomatis di-refresh tanpa perlu restart server secara manual.
 Postman untuk Dokumentasi API: Saya menggunakan Postman untuk menguji dan mendokumentasikan API yang telah Saya buat. Ini mempermudah pengujian endpoint API dan memastikan semuanya berfungsi sesuai yang diharapkan.
-Untuk link Postmannya siapa saja bisa mencarinya dengan cara buka di tab baru link ini: <a target="blank" href="https://documenter.getpostman.com/view/37601094/2sAXjM3WwJ">link Postman<a> 
+Untuk link Postmannya siapa saja bisa mencarinya dengan cara buka di tab baru link ini: <a href="https://documenter.getpostman.com/view/37601094/2sAXjM3WwJ"  target="blank">link Postman<a> 
 
 3. Frontend dengan Vue.js:
 Integrasi dengan API: Saya telah berhasil menghubungkan frontend yang dibuat dengan Vue.js ke API backend. Data buku dari API diambil dan ditampilkan dalam aplikasi Vue.js.
