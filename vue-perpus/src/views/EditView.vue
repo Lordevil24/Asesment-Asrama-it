@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5 mb-5">
-    <h1 class="h1 text-center mt-5 fw-bold">PERPUSTAKAAN</h1>
+    <h1 class="h1 text-center mt-5 mb-5 fw-bold">PERPUSTAKAAN</h1>
     <div class="card">
       <div class="card-header bg-info text-white">
         <h2 class="h5">Edit Buku</h2>
@@ -59,6 +59,7 @@ const fetchBook = async () => {
 const updateBook = async () => {
   try {
     await axios.put(`http://localhost:3000/buku/${currentBook.value.id}`, currentBook.value);
+    alert('Book edited successfully');
     router.push({ name: 'home' });
   } catch (error) {
     console.error('Error updating book:', error);

@@ -58,6 +58,7 @@ const addBook = async () => {
     
     // Navigasi kembali ke halaman daftar buku
     router.push('/');
+    alert('Book successfully added!');
   } catch (error) {
     console.error('Error adding book:', error);
   }

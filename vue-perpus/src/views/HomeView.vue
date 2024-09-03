@@ -5,12 +5,19 @@
       <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
         <h2 class="h5 mb-0">Daftar Buku</h2>
         <div class="d-flex">
-          <input
-            type="text"
-            v-model="searchTerm"
-            class="input form-control me-2"
-            placeholder="Cari buku..."
-          />
+          <div class="input-group w-50 me-3">
+    <span class="input-group-text" id="basic-addon1">
+      <i class="bi bi-search"></i> <!-- Ikon search -->
+    </span>
+    <input
+      type="text"
+      v-model="searchTerm"
+      class="form-control"
+      placeholder="Cari buku..."
+      aria-label="Search"
+      aria-describedby="basic-addon1"
+    />
+  </div>  
           <button class="btn btn-success" @click="goToPost">
             <i class="bi bi-plus"></i> Tambah Buku
           </button>
