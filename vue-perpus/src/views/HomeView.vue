@@ -65,6 +65,7 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 const buku = ref([]);
 const searchTerm = ref('');
@@ -104,14 +105,29 @@ const editBook = (buku) => {
   }
 };
 
+// Konfirmasi sebelum hapus
 const deleteBook = async (id) => {
-  try {
-    await axios.delete(`http://localhost:3000/buku/${id}`);
-    buku.value = buku.value.filter(book => book.id !== id);
-    alert('Book deleted successfully');
-  } catch (error) {
-    console.error('Error deleting book:', error);
-  }
+  Swal.fire({
+    title: 'Apakah kamu yakin?',
+    text: 'Buku ini akan dihapus secara permanen!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, hapus!',
+    cancelButtonText: 'Batal'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/buku/${id}`);
+        buku.value = buku.value.filter(book => book.id !== id);
+        Swal.fire('Terhapus!', 'Buku telah dihapus.', 'success');
+      } catch (error) {
+        console.error('Error deleting book:', error);
+        Swal.fire('Gagal', 'Terjadi kesalahan saat menghapus buku.', 'error');
+      }
+    }
+  });
 };
 
 // Ambil data saat komponen dimuat
@@ -119,6 +135,7 @@ onMounted(() => {
   fetchBooks();
 });
 </script>
+
 
 <style scoped>
 /* Tambahkan gaya kustom jika diperlukan */

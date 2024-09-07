@@ -34,6 +34,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';  // Tambahkan import untuk SweetAlert
 
 const newBook = ref({
   judul: '',
@@ -58,9 +59,22 @@ const addBook = async () => {
     
     // Navigasi kembali ke halaman daftar buku
     router.push('/');
-    alert('Book successfully added!');
+    
+    // SweetAlert message for success
+    Swal.fire({
+      icon: 'success',
+      title: 'Sukses!',
+      text: 'Buku berhasil ditambahkan!',
+    });
   } catch (error) {
     console.error('Error adding book:', error);
+    
+    // SweetAlert message for error
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Terjadi kesalahan saat menambahkan buku!',
+    });
   }
 };
 </script>

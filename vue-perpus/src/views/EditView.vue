@@ -30,12 +30,11 @@
   </div>
 </template>
 
-
-
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
 
 const route = useRoute();
 const router = useRouter();
@@ -47,21 +46,45 @@ const currentBook = ref({
   tahun_terbit: '',
 });
 
+const originalBook = ref({}); // Menyimpan data asli untuk perbandingan
+
 const fetchBook = async () => {
   try {
     const response = await axios.get(`http://localhost:3000/buku/${route.params.id}`);
     currentBook.value = response.data;
+    originalBook.value = { ...response.data }; // Salin data asli ke originalBook
   } catch (error) {
     console.error('Error fetching book:', error);
   }
 };
 
 const updateBook = async () => {
+  // Periksa apakah ada perubahan data
+  if (JSON.stringify(currentBook.value) === JSON.stringify(originalBook.value)) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Tidak Ada Perubahan',
+      text: 'Tidak ada data yang diubah',
+    });
+    router.push({ name: 'home' });
+    return;
+  }
+
+  // Jika ada perubahan, lakukan update
   try {
     await axios.put(`http://localhost:3000/buku/${currentBook.value.id}`, currentBook.value);
-    alert('Book edited successfully');
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil',
+      text: 'Buku berhasil diupdate',
+    });
     router.push({ name: 'home' });
   } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal',
+      text: 'Gagal mengupdate buku, silakan coba lagi',
+    });
     console.error('Error updating book:', error);
   }
 };
@@ -70,9 +93,7 @@ onMounted(fetchBook);
 </script>
 
 <style scoped>
-/* Tambahkan gaya kustom jika diperlukan */
 .h1{
   color: #60ffca;
 }
 </style>
-
